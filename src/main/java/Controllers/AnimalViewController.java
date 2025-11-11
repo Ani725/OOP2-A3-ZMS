@@ -1,13 +1,13 @@
-package com.example.assign3zms;
+package Controllers;
 
+import com.example.assign3zms.Animal;
+import com.example.assign3zms.Enclosure;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class AnimalViewController {
 
@@ -27,11 +27,9 @@ public class AnimalViewController {
     private TextField ageField;
 
     private Enclosure currentEnclosure;
-
     private Animal selectedAnimal;
 
-    public AnimalViewController() {
-    }
+    public AnimalViewController() {}
 
     public void setEnclosure(Enclosure enclosure) {
         this.currentEnclosure = enclosure;
@@ -76,12 +74,7 @@ public class AnimalViewController {
     }
 
     @FXML
-    protected void onCancelButtonClick() {
-        closeWindow();
-    }
-
-    @FXML
-    protected void onDeleteButtonClick(ActionEvent event) throws IOException {
+    protected void onDeleteButtonClick(ActionEvent event) {
         if (selectedAnimal != null && currentEnclosure != null) {
             currentEnclosure.removeAnimal(selectedAnimal);
             showAlert("Deleted", "Animal removed from enclosure.");
@@ -94,6 +87,11 @@ public class AnimalViewController {
     private void closeWindow() {
         Stage stage = (Stage) CancelButton.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    protected void onCancelButtonClick() {
+        closeWindow();
     }
 
     private void showAlert(String title, String message) {

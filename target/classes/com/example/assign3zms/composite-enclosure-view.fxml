@@ -9,7 +9,7 @@
 <VBox prefHeight="305.0" prefWidth="243.0" spacing="10.0"
       xmlns="http://javafx.com/javafx/23.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.assign3zms.Controllers.CompositeEnclosureCollectionController" >
+      fx:controller="Controllers.CompositeEnclosureCollectionController" >
     <children>
         <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="26.0" prefWidth="49.0" text="Back" disable="true"/>
         <TreeView fx:id="enclosureTreeView" prefHeight="184.0" prefWidth="200.0" />
