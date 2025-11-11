@@ -132,7 +132,7 @@ public class CompositeEnclosureCollectionController {
      * @throws IOException if the FXML file cannot be loaded
      */
     private void openEnclosureWindow(Enclosure pSelectedEnclosure, MouseEvent pEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.example.assignment3zoo/enclosure-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("enclosure-view.fxml"));
         Parent aView = fxmlLoader.load();
 
         // Pass the enclosure to the new controller
