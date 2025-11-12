@@ -76,7 +76,7 @@ public class AnimalViewController {
     @FXML
     protected void onDeleteButtonClick(ActionEvent event) {
         if (selectedAnimal != null && currentEnclosure != null) {
-            currentEnclosure.removeAnimal(selectedAnimal);
+            currentEnclosure.deleteAnimal(selectedAnimal);
             showAlert("Deleted", "Animal removed from enclosure.");
         } else {
             showAlert("Error", "No animal selected to delete.");
