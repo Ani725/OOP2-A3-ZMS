@@ -59,11 +59,10 @@ public class CompositeEnclosureCollection implements EnclosureCollection {
      * Recursively collect all leaf Enclosures within this composite.
      * @return List of leaf Enclosure objects
      */
-    @Override
-    public List<Enclosure> getEnclosures() {
-        List<Enclosure> enclosures = new ArrayList<>();
+    public List<EnclosureCollection> getEnclosures() {
+        List<EnclosureCollection> enclosures = new ArrayList<>();
         for (EnclosureCollection child : this.aEnclosures) {
-            enclosures.addAll(child.getEnclosures());
+            //enclosures.addAll(child.getEnclosures());
         }
         return enclosures;
     }

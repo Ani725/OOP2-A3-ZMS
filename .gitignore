@@ -48,3 +48,7 @@ build/
 
 documentation
 >>>>>>> origin/main
+/hs_err_pid4468.log
+/hs_err_pid4260.log
+/hs_err_pid15400.log
+/hs_err_pid16164.log

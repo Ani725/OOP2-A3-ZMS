@@ -12,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -34,8 +33,6 @@ import javafx.stage.Stage;
  * @author Dieudonne
  */
 public class EnclosureViewController {
-    @FXML
-    private Label titleText;
 
     @FXML
     private Button backButton;
@@ -43,37 +40,46 @@ public class EnclosureViewController {
     @FXML
     private ListView<String> aListView;
 
-    Enclosure aEnclosure; // The current enclosure being viewed
+    private Enclosure aEnclosure; // The current enclosure being viewed
     private Animal aAnimal; // The currently selected animal
 
+    private Stage aStage = new Stage();
     /**
      * Called automatically after FXML loading.
      * Initializes the view.
      */
     @FXML
     private void initialize() {
-        this.titleText.setText(this.aEnclosure.getName());
+//        Stage stage = (Stage) aVBOXStage.getScene().getWindow();
+//        stage.setTitle(this.aEnclosure.getName());
+        //this.aEnclosure =
+
+        //refreshView();
+    }
+
+    public void setEnclosure(Enclosure pSelectedEnclosure) {
+        this.aEnclosure = pSelectedEnclosure;
         refreshView();
     }
 
+//  TODO  : Add the functionality of double click to select an item
     /**
      * Handles selection of an item in the ListView.
      * Sets the selected animal if found.
      */
     @FXML
     private void onListViewItemSelect() {
-        String selectedItem = aListView.getSelectionModel().getSelectedItem();
+        String selectedItem = this.aListView.getSelectionModel().getSelectedItem();
         if (selectedItem == null) {
             AlertHelper.showInfoAlert("Selection", "No item selected", "Please select an animal or enclosure from the list.");
-
             return;
         }
         // Custom logic to set aAnimal based on selection
-        if (aEnclosure != null && aEnclosure.getAnimals() != null) {
-            for (Animal animal : aEnclosure.getAnimals()) {
+        if (this.aEnclosure != null && this.aEnclosure.getAnimals() != null) {
+            for (Animal animal : this.aEnclosure.getAnimals()) {
                 String display = animal.getName() + " (" + animal.getAge() + " years)";
                 if (display.equals(selectedItem)) {
-                    aAnimal = animal;
+                    this.aAnimal = animal;
                     return;
                 }
             }
@@ -88,17 +94,8 @@ public class EnclosureViewController {
      */
     @FXML
     protected void onBackButtonClick(){
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.close();
-    }
-
-    /**
-     * Handles the Close button click.
-     * Exits the application.
-     */
-    @FXML
-    protected void onCloseButtonClick(){
-        javafx.application.Platform.exit();
+        aStage = (Stage) backButton.getScene().getWindow();
+        aStage.close();
     }
 
     /**
@@ -122,31 +119,23 @@ public class EnclosureViewController {
     }
 
     /**
-     * Refreshes the view to show the current enclosure's animals or sub-enclosures.
+     * Refreshes the view to show the current enclosure's animals.
      */
+    @FXML
     private void refreshView() {
         if (this.aEnclosure == null) {
-            this.titleText.setText("No enclosure selected");
-            this.aListView.getItems().clear();
-            AlertHelper.showInfoAlert("Enclosure", "No enclosure selected", "Please select an enclosure to view its animals.");
             return;
         }
-        this.titleText.setText(this.aEnclosure.getName());
+        this.aStage.setTitle(this.aEnclosure.getName());
         this.aListView.getItems().clear();
 
         // Show animals if present
-        if (this.aEnclosure.getAnimals() != null && this.aEnclosure.getAnimals().size() > 0) {
+        if (this.aEnclosure.getAnimals() != null && !this.aEnclosure.getAnimals().isEmpty()) {
             for (Animal animal : this.aEnclosure.getAnimals()) {
                 this.aListView.getItems().add(animal.getName() + " (" + animal.getAge() + " years)");
             }
-        // Otherwise, show sub-enclosures if present
-        } else if (this.aEnclosure.getEnclosures() != null && this.aEnclosure.getEnclosures().size() > 0) {
-            for (Enclosure enclosure : this.aEnclosure.getEnclosures()) {
-                this.aListView.getItems().add(enclosure.getName());
-            }
-        // If neither, show alert for empty enclosure
         } else {
-            AlertHelper.showInfoAlert("Enclosure", "Empty enclosure", "This enclosure has no animals or sub-enclosures.");
+            AlertHelper.showInfoAlert("Enclosure", "Empty enclosure", "This enclosure has no animals.");
         }
     }
 
@@ -160,6 +149,7 @@ public class EnclosureViewController {
             AlertHelper.showErrorAlert("Add Error", "No enclosure selected", "Please select an enclosure before adding an animal.");
             return;
         }
+
         openNextView();
     }
 
@@ -199,9 +189,5 @@ public class EnclosureViewController {
         } catch (IOException e) {
             AlertHelper.showErrorAlert("Error", "Failed to open the animal view", "Try again, please!\n" + e.getMessage());
         }
-    }
-
-    public void setEnclosure(Enclosure pSelectedEnclosure) {
-        this.aEnclosure = pSelectedEnclosure;
     }
 }

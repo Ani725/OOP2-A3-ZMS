@@ -5,20 +5,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="335.0" prefWidth="340.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assign3zms.Controllers.EnclosureViewController">
+<VBox alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="335.0" prefWidth="340.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assign3zms.Controllers.EnclosureViewController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-    <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="22.0" prefWidth="286.0" spacing="180.0">
+    <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="22.0" prefWidth="286.0">
         <children>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="26.0" prefWidth="47.0" text="Back" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onCloseButtonClick" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: red;" text="Close" textFill="WHITE" />
+            <Button fx:id="backButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="26.0" prefWidth="47.0" text="Back" />
         </children>
     </HBox>
+   <Label text="Enclosure View">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
    <ListView fx:id="aListView" onMouseClicked="#onListViewItemSelect" prefHeight="200.0" prefWidth="200.0" />
-    <HBox alignment="CENTER" prefHeight="55.0" prefWidth="286.0" spacing="20.0">
+    <HBox alignment="CENTER" prefHeight="55.0" prefWidth="286.0" spacing="5.0">
         <children>
-            <Button onAction="#onAddButtonClick" style="-fx-background-color: blue;" text="Add" textFill="WHITE">
+            <Button onAction="#onAddButtonClick" prefHeight="30.0" prefWidth="59.0" style="-fx-background-color: blue;" text="Add" textFill="WHITE">
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
@@ -26,7 +30,7 @@
                     <Font size="14.0" />
                 </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onEditButtonClick" style="-fx-background-color: blue;" text="Edit" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#onEditButtonClick" prefHeight="31.0" prefWidth="57.0" style="-fx-background-color: blue;" text="Edit" textFill="WHITE">
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
@@ -34,7 +38,7 @@
                     <Font size="15.0" />
                 </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onDeleteButtonClick" style="-fx-background-color: blue;" text="Delete" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#onDeleteButtonClick" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: blue;" text="Delete" textFill="WHITE">
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
@@ -42,6 +46,11 @@
                     <Font size="14.0" />
                 </font>
             </Button>
+         <Button mnemonicParsing="false" onAction="#refreshView" prefHeight="31.0" prefWidth="82.0" style="-fx-background-color: blue;" text="Refresh" textFill="WHITE">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Button>
         </children>
     </HBox>
 </VBox>
