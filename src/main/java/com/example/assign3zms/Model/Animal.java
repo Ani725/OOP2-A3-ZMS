@@ -1,4 +1,4 @@
-package com.example.assign3zms;
+package com.example.assign3zms.Model;
 
 public class Animal {
 

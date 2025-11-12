@@ -1,7 +1,7 @@
-package Controllers;
+package com.example.assign3zms.Controllers;
 
-import com.example.assign3zms.Animal;
-import com.example.assign3zms.Enclosure;
+import com.example.assign3zms.Model.Animal;
+import com.example.assign3zms.Model.Enclosure;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

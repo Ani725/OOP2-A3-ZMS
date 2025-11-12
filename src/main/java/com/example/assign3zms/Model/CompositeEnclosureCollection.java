@@ -26,7 +26,7 @@ public class CompositeEnclosureCollection implements EnclosureCollection {
      * Construction to create a new CompositeEnclosureCollection.
      * @param pName Name ot the composite area/section
      */
-    private CompositeEnclosureCollection(String pName) {
+    public CompositeEnclosureCollection(String pName) {
         this.aName = pName;
         this.aEnclosures = new ArrayList<>();
     }
