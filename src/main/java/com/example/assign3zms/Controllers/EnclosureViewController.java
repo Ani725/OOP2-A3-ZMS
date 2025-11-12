@@ -52,6 +52,7 @@ public class EnclosureViewController {
      */
     @FXML
     private void initialize() {
+        this.titleText.setText(this.aEnclosure.getName());
         refreshView();
     }
 
@@ -64,7 +65,7 @@ public class EnclosureViewController {
         String selectedItem = aListView.getSelectionModel().getSelectedItem();
         if (selectedItem == null) {
             AlertHelper.showInfoAlert("Selection", "No item selected", "Please select an animal or enclosure from the list.");
-            //aAnimal = null;
+
             return;
         }
         // Custom logic to set aAnimal based on selection
@@ -77,7 +78,7 @@ public class EnclosureViewController {
                 }
             }
         }
-        //aAnimal = null;
+
         AlertHelper.showInfoAlert("Selection", "No animal found", "The selected item is not an animal.");
     }
 
