@@ -200,4 +200,8 @@ public class EnclosureViewController {
             AlertHelper.showErrorAlert("Error", "Failed to open the animal view", "Try again, please!\n" + e.getMessage());
         }
     }
+
+    public void setEnclosure(Enclosure pSelectedEnclosure) {
+        this.aEnclosure = pSelectedEnclosure;
+    }
 }

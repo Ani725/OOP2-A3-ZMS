@@ -55,7 +55,7 @@ public class ImportHelper {
      * @return a fully populated {@link CompositeEnclosureCollection} representing
      *         the “Big Cats” section of the zoo
      */
-    public static Model.CompositeEnclosureCollection createAnimals() {
+    public static CompositeEnclosureCollection createAnimals() {
         // --- Lions enclosure ---
         Enclosure lions = new Enclosure("Lions");
         lions.addAnimal(new Lion("Simba", 3));

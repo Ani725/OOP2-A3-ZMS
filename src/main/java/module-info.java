@@ -8,4 +8,6 @@ module com.example.assign3zms {
     opens com.example.assign3zms.Controllers to javafx.fxml;
     exports com.example.assign3zms.Model;
     opens com.example.assign3zms.Model to javafx.fxml;
+    exports com.example.assign3zms.Helpers;
+    opens com.example.assign3zms.Helpers to javafx.fxml;
 }
