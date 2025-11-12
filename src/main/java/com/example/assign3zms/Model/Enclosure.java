@@ -7,7 +7,7 @@ import java.util.List;
  * An enclosure that holds a list of {@link Animal} objects.
  * <p>
  * This class implements {@link EnclosureCollection}. Since this is a leaf
- * enclosure (not a composite), {@link #getEnclosures()} returns an empty list for now.
+ * enclosure (not a composite).
  *
  * <p>Fields are intentionally final to indicate that the enclosure name and
  * the backing animal list reference to do not change after construction. The
@@ -68,16 +68,6 @@ public class Enclosure implements EnclosureCollection{
             throw new NullPointerException("Cannot remove zero animal from enclosure.");
         }
         this.aAnimal.remove(pAnimal); 
-    }
-
-    /**
-     * Return nested enclosures. For a leaf enclosure this returns an empty list.
-     *
-     * @return an empty list for now (no child enclosures)
-     */
-    @Override
-    public List<Enclosure> getEnclosures() {
-        return List.of();
     }
 
     /**

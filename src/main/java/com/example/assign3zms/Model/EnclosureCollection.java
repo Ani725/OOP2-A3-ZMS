@@ -9,11 +9,6 @@ import java.util.List;
  */
 public interface EnclosureCollection {
 
-    /**
-     * Get all the leaf Enclosure objects inside this collection.
-     * @return List of Enclosure
-     */
-    List<Enclosure> getEnclosures();
 
     /**
      * Get the name of this collection or enclosure.
