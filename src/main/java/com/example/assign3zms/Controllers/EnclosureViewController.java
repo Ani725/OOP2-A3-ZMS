@@ -149,8 +149,9 @@ public class EnclosureViewController {
             AlertHelper.showErrorAlert("Add Error", "No enclosure selected", "Please select an enclosure before adding an animal.");
             return;
         }
+        //To add a new animal
 
-        openNextView();
+        openNextView(new Animal(null,0));
     }
 
     /**
@@ -167,20 +168,20 @@ public class EnclosureViewController {
             AlertHelper.showErrorAlert("Edit Error", "No animal selected", "Please select an animal to edit.");
             return;
         }
-        openNextView();
+        openNextView(this.aAnimal);
     }
 
     /**
      * Opens the animal view (modal) for adding or editing an animal.
      */
-    private void openNextView() {
+    private void openNextView(Animal pAnimal) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/assign3zms/animal-view.fxml"));
             Parent root = loader.load();
 
             AnimalViewController controller = loader.getController();
             controller.setEnclosure(this.aEnclosure);
-            controller.setAnimal(this.aAnimal);
+            controller.setAnimal(pAnimal);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
