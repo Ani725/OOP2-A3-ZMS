@@ -106,7 +106,7 @@ public class AnimalViewController {
             }
 
             // Edit existing
-            if (selectedAnimal != null) {
+            if (selectedAnimal.getName() != null) {
                 selectedAnimal.setName(name);
                 selectedAnimal.setAge(age);
                 showAlert("Success", "Animal updated successfully!");

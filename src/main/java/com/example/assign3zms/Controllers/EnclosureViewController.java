@@ -35,10 +35,10 @@ import javafx.stage.Stage;
 public class EnclosureViewController {
 
     @FXML
-    private Button backButton;
+    private Button backButton; // To go back to the previous view
 
     @FXML
-    private ListView<String> aListView;
+    private ListView<String> aListView; // The current listView
 
     private Enclosure aEnclosure; // The current enclosure being viewed
     private Animal aAnimal; // The currently selected animal
@@ -48,21 +48,12 @@ public class EnclosureViewController {
      * Called automatically after FXML loading.
      * Initializes the view.
      */
-    @FXML
-    private void initialize() {
-//        Stage stage = (Stage) aVBOXStage.getScene().getWindow();
-//        stage.setTitle(this.aEnclosure.getName());
-        //this.aEnclosure =
-
-        //refreshView();
-    }
 
     public void setEnclosure(Enclosure pSelectedEnclosure) {
         this.aEnclosure = pSelectedEnclosure;
         refreshView();
     }
 
-//  TODO  : Add the functionality of double click to select an item
     /**
      * Handles selection of an item in the ListView.
      * Sets the selected animal if found.
@@ -103,7 +94,7 @@ public class EnclosureViewController {
      * Deletes the selected animal from the enclosure.
      */
     @FXML
-    private void onDeleteButtonClick(ActionEvent pEvent){
+    private void onDeleteButtonClick(){
         if (this.aEnclosure == null) {
             AlertHelper.showErrorAlert("Delete Error", "No enclosure selected", "Please select an enclosure before deleting.");
             return;
@@ -144,13 +135,12 @@ public class EnclosureViewController {
      * Opens the animal view for adding a new animal.
      */
     @FXML
-    protected void onAddButtonClick(ActionEvent pEvent) {
+    protected void onAddButtonClick() {
         if (this.aEnclosure == null) {
             AlertHelper.showErrorAlert("Add Error", "No enclosure selected", "Please select an enclosure before adding an animal.");
             return;
         }
         //To add a new animal
-
         openNextView(new Animal(null,0));
     }
 
@@ -159,7 +149,7 @@ public class EnclosureViewController {
      * Opens the animal view for editing the selected animal.
      */
     @FXML
-    protected void onEditButtonClick(ActionEvent pEvent) {
+    protected void onEditButtonClick() {
         if (this.aEnclosure == null) {
             AlertHelper.showErrorAlert("Edit Error", "No enclosure selected", "Please select an enclosure before editing an animal.");
             return;
