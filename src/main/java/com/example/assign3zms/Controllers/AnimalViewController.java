@@ -1,11 +1,11 @@
 package com.example.assign3zms.Controllers;
 
-import com.example.assign3zms.Model.Animal;
-import com.example.assign3zms.Model.Enclosure;
+import com.example.assign3zms.Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -32,6 +32,10 @@ public class AnimalViewController {
     @FXML
     private Button DeleteButton;
 
+    /** ComboBox for the animal type. */
+    @FXML
+    private ComboBox<String> animalTypeCombo;
+
     /** TextField for the animal's name. */
     @FXML
     private TextField nameField;
@@ -46,43 +50,42 @@ public class AnimalViewController {
     /** The currently selected animal being edited (null if adding a new one). */
     private Animal selectedAnimal;
 
-    /**
-     * Default constructor for the AnimalViewController.
-     * Called automatically by the JavaFX framework.
-     */
+    /** Default constructor. */
     public AnimalViewController() {}
 
-    /**
-     * Sets the current enclosure that the animal belongs to.
-     *
-     * @param enclosure The {@link Enclosure} where animals are stored.
-     */
+    /** Sets the current enclosure. */
     public void setEnclosure(Enclosure enclosure) {
         this.currentEnclosure = enclosure;
     }
 
     /**
-     * Sets the currently selected animal to be edited.
-     * If the animal is not null, populates the text fields with its data.
-     *
-     * @param animal The {@link Animal} to be edited, or null if adding a new one.
+     * Sets the currently selected animal for editing.
+     * Populates all fields and selects the correct animal type.
      */
     public void setAnimal(Animal animal) {
         this.selectedAnimal = animal;
         if (animal != null) {
             nameField.setText(animal.getName());
             ageField.setText(String.valueOf(animal.getAge()));
+
+            // Select correct type in ComboBox
+            if (animal instanceof Tiger)
+                animalTypeCombo.getSelectionModel().select("Tiger");
+            else if (animal instanceof Cougar)
+                animalTypeCombo.getSelectionModel().select("Cougar");
+            else
+                animalTypeCombo.getSelectionModel().select("Lion");
+        } else {
+            // clear fields for adding new animal
+            nameField.clear();
+            ageField.clear();
+            animalTypeCombo.getSelectionModel().clearSelection();
         }
+        // Always show dropdown box
+        animalTypeCombo.setDisable(false);
     }
 
-    /**
-     * Handles the "Save" button click event.
-     * <ul>
-     *     <li>If an animal is being edited, updates its information.</li>
-     *     <li>If no animal is selected, creates and adds a new one to the enclosure.</li>
-     * </ul>
-     * Validates that both fields are filled and that age is a valid number.
-     */
+    /** Handles the "Save" button click (add or edit). */
     @FXML
     protected void onSaveButtonClick() {
         String name = nameField.getText().trim();
@@ -95,23 +98,32 @@ public class AnimalViewController {
 
         try {
             int age = Integer.parseInt(ageText);
+            String type = animalTypeCombo.getValue();
 
-            // Edit existing animal
+            if (type == null || type.isEmpty()) {
+                showAlert("Error", "Please select an animal type.");
+                return;
+            }
+
+            // Edit existing
             if (selectedAnimal != null) {
                 selectedAnimal.setName(name);
                 selectedAnimal.setAge(age);
                 showAlert("Success", "Animal updated successfully!");
             }
-
-            // Add new animal
+            // Add new
             else if (currentEnclosure != null) {
-                Animal newAnimal = new Animal(name, age);
+                Animal newAnimal;
+                switch (type) {
+                    case "Tiger": newAnimal = new Tiger(name, age); break;
+                    case "Cougar": newAnimal = new Cougar(name, age); break;
+                    case "Lion":
+                    default: newAnimal = new Lion(name, age); break;
+                }
+
                 currentEnclosure.addAnimal(newAnimal);
                 showAlert("Success", "Animal added successfully!");
-            }
-
-            // Missing enclosure
-            else {
+            } else {
                 showAlert("Error", "No enclosure selected.");
                 return;
             }
@@ -123,12 +135,7 @@ public class AnimalViewController {
         }
     }
 
-    /**
-     * Handles the "Delete" button click event.
-     * Removes the selected animal from the enclosure if possible.
-     *
-     * @param event The {@link ActionEvent} triggered by clicking the delete button.
-     */
+    /** Handles the "Delete" button click. */
     @FXML
     protected void onDeleteButtonClick(ActionEvent event) {
         if (selectedAnimal != null && currentEnclosure != null) {
@@ -140,34 +147,30 @@ public class AnimalViewController {
         closeWindow();
     }
 
-    /**
-     * Handles the "Cancel" button click event.
-     * Closes the current window without making any changes.
-     */
+    /** Handles cancel button click. */
     @FXML
     protected void onCancelButtonClick() {
         closeWindow();
     }
 
-    /**
-     * Closes the current JavaFX window.
-     */
+    /** Closes the current window. */
     private void closeWindow() {
         Stage stage = (Stage) CancelButton.getScene().getWindow();
         stage.close();
     }
 
-    /**
-     * Displays a simple information alert with a given title and message.
-     *
-     * @param title   The title of the alert window.
-     * @param message The message text to display in the alert.
-     */
+    /** Shows an alert popup with the given message. */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    /** Animal types available in dropbox */
+    @FXML
+    private void initialize() {
+        animalTypeCombo.getItems().addAll("Lion", "Tiger", "Cougar");
     }
 }
